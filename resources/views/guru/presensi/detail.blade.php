@@ -24,31 +24,25 @@
         </div>
     </form>
 
+
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Judul</th>
-                <th>Topic</th>
-                <th>Tanggal</th>
-                <th>Kelas</th>
-                <th>Aksi</th>
+                <th>Nama</th>
+                <th>Jam Absensi</th>
+                <th>Keterangan</th>
+                {{-- No	Nama Siswa	Jam Absensi	Keterangan --}}
             </tr>
         </thead>
 
         <tbody>
-            @foreach ($presensi as $p)
+            @foreach ($detailPresensi as $p)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $p->subject->name }}</td>
-                <td>{{ $p->topic }}</td>
-                <td>{{ $p->date }}</td>
-                <td>{{ $p->classe->name }}</td>
-                <td>
-                    <a href="{{ url("/guru/presensi/detail/$p->id") }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                    <a href="{{ url("/guru/presensi/ubah/$p->id") }}" class="btn btn-warning"><i class="fas fa-pen"></i></a>
-                    <a href="{{ url("/guru/presensi/hapus/$p->id") }}" onclick="return confirm('Yakin Mau Dihapus')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                </td>
+                <td>{{ $p->user->name }}</td>
+                <td>{{ $p->updated_at->format("H:i:s") }}</td>
+                <td>{{ $p->attstatus }}</td>
             </tr>
             @endforeach
         </tbody>

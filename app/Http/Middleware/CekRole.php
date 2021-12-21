@@ -17,10 +17,10 @@ class CekRole
 
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (in_array($request->user()->role, $roles)) {
+        if (in_array(auth()->user()->role, $roles)) {
             return next($request);
         }
-        return redirect('/');
+        return redirect('/login');
     }
 
     // App=>http=>kernel

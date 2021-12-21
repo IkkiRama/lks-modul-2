@@ -37,12 +37,7 @@ Route::get('/login', [AuthController::class, 'index'])->name("login");
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/logout', [AuthController::class, 'logout']);
-Route::get('/guru/presensi', [GuruController::class, 'index']);
-Route::get('/guru/presensi/tambah', [GuruController::class, 'create']);
-Route::post('/guru/presensi/tambah', [GuruController::class, 'store']);
-Route::get('/guru/presensi/ubah/{presensi}', [GuruController::class, 'edit']);
-Route::put('/guru/presensi/ubah/{presensi}', [GuruController::class, 'update']);
-Route::get('/guru/presensi/hapus/{presensi}', [GuruController::class, 'destroy']);
+
 
 
 
@@ -50,16 +45,31 @@ Route::get('/guru/presensi/hapus/{presensi}', [GuruController::class, 'destroy']
 //     Route::get('/', [DashboardController::class, 'index']);
 // });
 
+// ->middleware(CekR::class);
+
+
+
+Route::group(["middleware"=>["auth", "CekRole:guru,siswa,admin"]], function (){
+    Route::get('/', [DashboardController::class, 'index']);
+});
+
+
+Route::group(["middleware"=>["auth"]], function (){
+
+
 Route::get('/siswa/presensi', [SiswaController::class, 'index']);
 Route::get('/siswa/presensi/konfirmasi/{presensi}', [SiswaController::class, 'create']);
 Route::post('/siswa/presensi/konfirmasi/{presensi}', [SiswaController::class, 'store']);
 Route::get('/siswa/presensi/ubahKonfirmasi/{presensi}', [SiswaController::class, 'edit']);
 Route::put('/siswa/presensi/ubahKonfirmasi/{presensi}', [SiswaController::class, 'update']);
 
-Route::get('/', [DashboardController::class, 'index']);
-Route::group(["middleware"=>["auth", 'CekRole:guru,siswa,admin']], function (){
-});
-
-Route::group(["middleware"=>["auth", 'CekRole:siswa']], function (){
+Route::get('/guru/presensi', [GuruController::class, 'index']);
+Route::get('/guru/presensi/tambah', [GuruController::class, 'create']);
+Route::post('/guru/presensi/tambah', [GuruController::class, 'store']);
+Route::get('/guru/presensi/ubah/{presensi}', [GuruController::class, 'edit']);
+Route::put('/guru/presensi/ubah/{presensi}', [GuruController::class, 'update']);
+Route::get('/guru/presensi/hapus/{presensi}', [GuruController::class, 'destroy']);
+Route::get('/guru/presensi/eksporPDF', [GuruController::class, 'exportPDF']);
+Route::get('/guru/presensi/detail/{presensi}', [GuruController::class, 'show']);
 
 });
