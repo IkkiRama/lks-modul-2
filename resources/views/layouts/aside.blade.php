@@ -1,10 +1,11 @@
 <aside>
     <div class="profil">
         @php
-            $foto = auth()->user()->foto;
+            // $foto = auth()->user()->foto;
         @endphp
-        <img src="{{ asset("fotoUser/$foto") }}" alt="img user">
-        <p>{{ auth()->user()->name }}</p>
+        <img src="{{ asset("fotoUser/guru.svg") }}" alt="img user">
+        <p>Kimak</p>
+        {{-- <p>{{ auth()->user()->name }}</p> --}}
     </div>
 
 

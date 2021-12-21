@@ -1,7 +1,5 @@
 @extends("layouts.layout")
-@section("title","Dashboard")
+@section("title","Presensi | Siswa")
 @section("konten")
-    <h2>Kimak</h2>
-
 
 @endsection

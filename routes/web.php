@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -14,9 +15,11 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
+// Route::get('/', [AuthController::class, 'index']);
+Route::get('/login', [AuthController::class, 'index']);
+Route::post('/', [AuthController::class, 'login']);
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::group(["middleware"=>["auth", 'CekRole:admin,guru,siswa']], function (){
+    Route::get('/', [DashboardController::class, 'index']);
+});
