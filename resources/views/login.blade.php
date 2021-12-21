@@ -8,12 +8,6 @@
     <link rel="stylesheet" href="{{ asset("css/riset.css") }}">
     <link rel="stylesheet" href="{{ asset("css/style.css") }}">
     <link rel="stylesheet" href="{{ asset("css/form.css") }}">
-
-    <style>
-        /* .containerLogin{
-            width: 100%;
-        } */
-    </style>
 </head>
 <body>
     <div class="containerLogin">

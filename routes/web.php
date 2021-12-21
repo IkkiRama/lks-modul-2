@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\CekRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -15,11 +17,30 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('index', [
+//         'titile'=> "home"
+//     ]);
+// });
 
-// Route::get('/', [AuthController::class, 'index']);
-Route::get('/login', [AuthController::class, 'index']);
-Route::post('/', [AuthController::class, 'login']);
+
+// Route::get('/', function () {
+//     return view('index', [
+//         'titile'=> "home"
+//     ]);
+// });
+
+
+Route::get('/login', [AuthController::class, 'index'])->name("login");
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/guru/presensi', [GuruController::class, 'index']);
+
+// Route::group(["middleware"=>"auth"], function (){
+//     Route::get('/', [DashboardController::class, 'index']);
+// });
+
 
 Route::group(["middleware"=>["auth", 'CekRole:admin,guru,siswa']], function (){
-    Route::get('/', [DashboardController::class, 'index']);
 });
