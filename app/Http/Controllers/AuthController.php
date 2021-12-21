@@ -15,6 +15,7 @@ class AuthController extends Controller
             return redirect('/');
         }
 
+
         return view("login");
     }
 

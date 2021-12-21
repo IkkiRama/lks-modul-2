@@ -1,28 +1,49 @@
-@extends("layouts.layout")
-@section("title","Presensi | Guru")
-@section("konten")
-    <h2>Presensi Guru</h2>
+<style>
+*{
+    font-family: sans-serif;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #302f2f;
+}
+
+table thead th {
+    color: #fff;
+    padding: 0.75rem;
+    background-color: #343a40;
+    border-bottom: 2px solid #302f2f;
+}
 
 
-    <a href="{{ url("/guru/presensi/tambah") }}" class="btn btn-primary mb-20">Tambah</a>
-    <a href="{{ url("/guru/presensi/detail/eksporDetailPDF") }}" class="btn btn-danger mb-20">Ekspor</a>
+.table-detail tr th,
+table tfoot tr td,
+table tfoot tr th,
+table tbody tr th,
+table tbody tr td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+}
 
-    @if (Session::has("sukses"))
-        <div class="alert">{{ Session::get("sukses") }}</div>
-    @endif
+table tfoot tr:hover,
+table tbody tr:hover,
+table tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 
-    @if (Session::has("gagal"))
-        <div class="alert alert-danger">{{ Session::get("gagal") }}</div>
-    @endif
+table img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
 
-    <form action="{{ url("/guru/presensi") }}" class="mb-20" method="get">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" name="search">
-                <button class="btn btn-primary">Cari</button>
-            </div>
-        </div>
-    </form>
+table .btn {
+    margin: 5px;
+    padding: .3rem .75rem;
+}
+
+</style>
+<h2>Detail Laporan</h2>
 
     <table class="table-detail mb-20">
         <tr>
@@ -43,11 +64,6 @@
         <tr>
             <th>Tanpa Keterangan</th>
             <td>{{ $alpa }}</td>
-        </tr>
-
-        <tr>
-            <th>Rata Rata Kehadiran</th>
-            <td>{{ $rataRataKehadiran }}%</td>
         </tr>
 
     </table>
@@ -75,5 +91,3 @@
             @endforeach
         </tbody>
     </table>
-    {{-- No	Judul	Topic	Tanggal	Kelas	Aksi --}}
-@endsection

@@ -59,15 +59,16 @@ class GuruController extends Controller
 
     public function show(Attendance $presensi)
     {
-        $detailPresensi = Attdetail::where("attendance_id","like", $presensi->id)->latest()->search(request(["search"]));
-
-        return view("guru.presensi.detail",[
+        $detailPresensi = Attdetail::with(['user'])->where("attendance_id",'like', $presensi->id)->get();
+         return view("guru.presensi.detail",[
             'title'=> 'presensi',
-            'detailPresensi'=> $detailPresensi->get(),
+            'presensi' => $presensi->load("classe", "subject"),
+            'detailPresensi'=> $detailPresensi,
             'hadir'=> $detailPresensi->where("attstatus", 'like', 'Hadir')->count(),
             'sakit'=> $detailPresensi->where("attstatus", 'like', 'Sakit')->count(),
             'izin'=> $detailPresensi->where("attstatus", 'like', 'Izin')->count(),
             'alpa'=> $detailPresensi->where("attstatus", 'like', 'Tanpa Keterangan')->count(),
+            'rataRataKehadiran'=> $detailPresensi->where("attstatus", 'like', 'Hadir')->count() / $detailPresensi->count() * 100
         ]);
 
     }
@@ -107,8 +108,8 @@ class GuruController extends Controller
 
     public function destroy(Attendance $presensi)
     {
-        $subject = Subject::where("id", "like",$presensi->subject_id)->delete();
-        Attdetail::where("attendance_id","like",$presensi->id)->delete();
+        // $subject = Subject::where("id", "like",$presensi->subject_id)->delete();
+        // Attdetail::where("attendance_id","like",$presensi->id)->delete();
         $presensi->delete();
         return redirect('/guru/presensi')->with("sukses", "Data Berhasil Dihapus");
     }
@@ -126,7 +127,7 @@ class GuruController extends Controller
     {
         $detailPresensi = Attdetail::with(['user'])->where("attendance_id",'like', $presensi->id)->get();
         $pdf = App::make('dompdf.wrapper');
-        $pdf = $pdf->loadView('admin.laporanDetail', [
+        $pdf = $pdf->loadView('guru.laporanDetail', [
             'presensi' => $presensi->load("classe", "subject"),
             'detailPresensi'=> $detailPresensi,
             'hadir'=> $detailPresensi->where("attstatus", 'like', 'Hadir')->count(),

@@ -1,3 +1,4 @@
+{{-- {{ dd(auth()->user()) }} --}}
 <aside>
     <div class="profil">
         @php
@@ -18,7 +19,7 @@
     </div>
 
 
-    @if (auth()->user()->role==='admin')
+    {{-- @if (auth()->user()->role==='admin') --}}
     <div class="perMenu {{ $title === 'presensi' ? 'active' : '' }}">
         <a href="{{ url("/admin/presensi") }}" class="link">
             <div class="icon">
@@ -27,10 +28,10 @@
             <p>Presensi</p>
         </a>
     </div>
-    @endif
+    {{-- @endif --}}
 
 
-    @if (auth()->user()->role==='guru')
+    {{-- @if (auth()->user()->role==='guru') --}}
     <div class="perMenu {{ $title === 'presensi' ? 'active' : '' }}">
         <a href="{{ url("/guru/presensi") }}" class="link">
             <div class="icon">
@@ -39,10 +40,10 @@
             <p>Presensi</p>
         </a>
     </div>
-    @endif
+    {{-- @endif --}}
 
 
-    @if (auth()->user()->role==='siswa')
+    {{-- @if (auth()->user()->role==='user') --}}
     <div class="perMenu {{ $title === 'presensi' ? 'active' : '' }}">
         <a href="{{ url("/siswa/presensi") }}" class="link">
             <div class="icon">
@@ -51,10 +52,10 @@
             <p>Presensi</p>
         </a>
     </div>
-    @endif
+    {{-- @endif --}}
 
 
-    @if (auth()->user()->role==='admin')
+    {{-- @if (auth()->user()->role==='admin') --}}
     <div class="perMenu {{ $title === 'kelas' ? 'active' : '' }}">
         <a href="{{ url("/admin/kelas") }}" class="link">
             <div class="icon">
@@ -63,10 +64,10 @@
             <p>Kelas</p>
         </a>
     </div>
-    @endif
+    {{-- @endif --}}
 
 
-    @if (auth()->user()->role==='admin')
+    {{-- @if (auth()->user()->role==='admin') --}}
     <div class="perMenu {{ $title === 'user' ? 'active' : '' }}">
         <a href="{{ url("/admin/user") }}" class="link">
             <div class="icon">
@@ -75,7 +76,7 @@
             <p>User</p>
         </a>
     </div>
-    @endif
+    {{-- @endif --}}
 
 
     <div class="perMenu">

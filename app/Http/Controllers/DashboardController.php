@@ -14,15 +14,15 @@ class DashboardController extends Controller
     public function index()
     {
         // dd("a");
-        return view("index",[
-                "user"=> User::all(),
-                "presensi"=> Attendance::all(),
-                "kelas"=> Classe::all(),
-                'title'=> 'home'
-        ]);
 
         if (auth()->user()->role==='admin') {
 
+            return view("index",[
+                    "user"=> User::all(),
+                    "presensi"=> Attendance::all(),
+                    "kelas"=> Classe::all(),
+                    'title'=> 'home'
+            ]);
         }else if(auth()->user()->role==='guru'){
             return view("index",[
                 "presensi"=> Attendance::where('user_id','like',auth()->user()->id)->count(),
