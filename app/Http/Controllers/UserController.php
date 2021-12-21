@@ -13,8 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -71,12 +72,6 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

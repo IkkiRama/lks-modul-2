@@ -1,8 +1,8 @@
 <header>
     @php
-        // $img = auth()->user()->foto
+        $img = auth()->user()->foto
     @endphp
-    <img src="{{ asset("fotoUser/user.svg") }}" alt="img user">
+    <img src="{{ asset("fotoUser/$img") }}" alt="img user">
 
     <div class="menu">
         <span></span>

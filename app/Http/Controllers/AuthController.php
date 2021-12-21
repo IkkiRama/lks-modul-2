@@ -26,8 +26,8 @@ class AuthController extends Controller
             'password'=> 'required'
         ]);
 
-        if (Auth::attempt($validate)) {
-            return redirect(RouteServiceProvider::HOME);
+        if (Auth::attempt($request->only(["email", "password"]))) {
+            return redirect("/");
         }
         return redirect("/login");
     }
